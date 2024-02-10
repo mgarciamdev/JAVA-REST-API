@@ -18,6 +18,7 @@ public class UserController {
 
     @GetMapping
     public ArrayList<UserModel> getUsers() {
+
         return this.userService.getUsers();
     }
 
@@ -28,11 +29,12 @@ public class UserController {
 
     @GetMapping(path = "/{id}")
     public Optional<UserModel> getUserById(@PathVariable Long id){
+
         return this.userService.getById(id);
     }
 
     @PutMapping(path = "/{id}")
-    public UserModel updateUserBy(@RequestBody UserModel request, Long id){
+    public UserModel updateUserById(@RequestBody UserModel request, @PathVariable Long id){
         return this.userService.updateById(request, id);
     }
 
@@ -41,7 +43,7 @@ public class UserController {
         boolean ok = this.userService.deleteUser(id);
 
         if (ok){
-            return "Usuario con el id =" + id + "fue eliminado exitosamente";
+            return "Usuario con el id = " + id + "fue eliminado exitosamente";
         } else {
             return "Ocurrio un problema interno del servidor y no se pudo eliminar a el usuario con el id =" + id;
         }
